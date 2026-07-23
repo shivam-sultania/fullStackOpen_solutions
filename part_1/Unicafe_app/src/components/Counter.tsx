@@ -1,12 +1,13 @@
 interface CounterProp {
     name:string;
-    count:number;
+    value:number;
+    suffix?:string;
 }
 
-const Counter = ({name,count}:CounterProp) => {
+const Counter = ({name,value,suffix}:CounterProp) => {
     return (
         <>
-        <p>{name} {count}</p>
+        <p>{name} {value} {suffix}</p>
         </>
     )
 }
