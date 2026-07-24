@@ -7,7 +7,10 @@ interface CounterProp {
 const StatisticLine = ({name,value,suffix}:CounterProp) => {
     return (
         <>
-        <p>{name} {value} {suffix}</p>
+        <tr>
+            <td>{name}</td>
+            <td>{value} {suffix}</td>
+        </tr>
         </>
     )
 }
