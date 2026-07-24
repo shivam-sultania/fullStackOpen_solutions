@@ -1,4 +1,4 @@
-import Counter from './Counter';
+import StatisticLine from './StatisticLine';
 
 interface StatisticsProp {
     good: number;
@@ -16,12 +16,12 @@ const Statistics = ({good,bad,neutral}: StatisticsProp) => {
         return(
         <>
         <h1>statistics</h1>
-        <Counter name="good" value={good}></Counter>
-        <Counter name="neutral" value={neutral}></Counter>
-        <Counter name="bad" value={bad}></Counter>
-        <Counter name="all" value={total}></Counter>
-        <Counter name="average" value={average}></Counter>
-        <Counter name="positive" value={positive} suffix='%'></Counter>
+        <StatisticLine name="good" value={good}></StatisticLine>
+        <StatisticLine name="neutral" value={neutral}></StatisticLine>
+        <StatisticLine name="bad" value={bad}></StatisticLine>
+        <StatisticLine name="all" value={total}></StatisticLine>
+        <StatisticLine name="average" value={average}></StatisticLine>
+        <StatisticLine name="positive" value={positive} suffix='%'></StatisticLine>
         </>
     )
     }

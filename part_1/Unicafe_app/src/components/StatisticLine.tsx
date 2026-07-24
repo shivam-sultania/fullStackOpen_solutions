@@ -4,7 +4,7 @@ interface CounterProp {
     suffix?:string;
 }
 
-const Counter = ({name,value,suffix}:CounterProp) => {
+const StatisticLine = ({name,value,suffix}:CounterProp) => {
     return (
         <>
         <p>{name} {value} {suffix}</p>
@@ -12,4 +12,4 @@ const Counter = ({name,value,suffix}:CounterProp) => {
     )
 }
 
-export default Counter
+export default StatisticLine
