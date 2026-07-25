@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-const App = () => {
-  const anecdotes = [
+const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
     'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
@@ -12,19 +11,43 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
-  const ln = anecdotes.length
+const ln = anecdotes.length
 
+const App = () => {
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(ln).fill(0))
 
-  const handleClick = () => {
-    const randomInd:number = Math.floor(Math.random()*ln)
-    setSelected(randomInd)
+  const handleNextClick = () => {
+    console.log("next clicked, curr index = ",selected)
+    
+    setSelected(() => {
+        let randomInd:number = Math.floor(Math.random()*ln)
+
+        while (randomInd === selected) {
+        randomInd = Math.floor(Math.random() * ln)
+        }
+        
+        console.log("new index = ",randomInd)
+        return randomInd
+    })
+  }
+  
+  const handleVoteClick = () => {
+    console.log("Vote clicked, old votes = ",votes)
+    setVotes(prev => {
+        const next = [...prev]
+        next[selected] += 1
+        console.log("new votes = ",next)
+        return next
+    })
   }
 
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <button onClick={handleClick}>next anecdote</button>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handleNextClick}>next anecdote</button>
+      <button onClick={handleVoteClick}>vote</button>
     </div>
   )
 }
