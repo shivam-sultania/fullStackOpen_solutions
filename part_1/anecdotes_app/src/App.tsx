@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Anecdote from './components/Anecdote'
 
 const anecdotes = [
     'If it hurts, do it more often.',
@@ -16,14 +17,16 @@ const ln = anecdotes.length
 const App = () => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array(ln).fill(0))
+  const [maxInd, setMaxInd] = useState(0)
 
   const handleNextClick = () => {
     console.log("next clicked, curr index = ",selected)
     
-    setSelected(() => {
+    setSelected(prev => {
+        if (ln===1) return prev
         let randomInd:number = Math.floor(Math.random()*ln)
 
-        while (randomInd === selected) {
+        while (randomInd === prev) {
         randomInd = Math.floor(Math.random() * ln)
         }
         
@@ -37,17 +40,31 @@ const App = () => {
     setVotes(prev => {
         const next = [...prev]
         next[selected] += 1
+        
+        // Updates the top anecdote if the current vote overtakes
+        if (maxInd!==selected && next[maxInd]<next[selected]) {
+            console.log("top anecdote changed")
+            setMaxInd(selected)
+        }
+
         console.log("new votes = ",next)
         return next
     })
   }
 
+  // Edge case handling
+  if (ln===0) {
+    return (
+        <p>There are no anecdotes</p>
+    )
+  }
+
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
-      <button onClick={handleNextClick}>next anecdote</button>
+      <Anecdote message='Anecdote of the day' anecdote={anecdotes[selected]} vote = {votes[selected]} />
       <button onClick={handleVoteClick}>vote</button>
+      <button onClick={handleNextClick}>next anecdote</button>
+      <Anecdote message='Anecdote with the most votes' anecdote={anecdotes[maxInd]} vote = {votes[maxInd]} />
     </div>
   )
 }
