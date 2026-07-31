@@ -1,20 +1,9 @@
 import Header from './Header'
 import Content from './Content'
 import Total from './Total'
+import type { CourseDesc } from '../types'
 
-export interface CoursePart {
-    name: string,
-    exercises: number,
-    id: number,
-}
-
-interface CourseProp {
-    id:number,
-    name:string,
-    parts: CoursePart[],
-}
-
-export default function Course({course}:{course:CourseProp}) {
+export default function Course({course}:{course:CourseDesc}) {
     return (
         <div>
             <Header name={course.name}></Header>

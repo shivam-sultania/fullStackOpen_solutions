@@ -1,4 +1,4 @@
-import type {CoursePart} from './Course'
+import type {CoursePart} from '../types'
 
 const Total = ({parts}:{parts:CoursePart[]}) => {
     return (
