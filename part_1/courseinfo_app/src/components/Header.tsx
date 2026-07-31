@@ -1,8 +1,6 @@
-interface HeaderProps {course: string}
-
-const Header = (props:HeaderProps) => {
+const Header = ({name}:{name:string}) => {
     return (
-        <h1>{props.course}</h1>
+        <h1>{name}</h1>
     )
 }
 

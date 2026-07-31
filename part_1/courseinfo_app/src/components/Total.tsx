@@ -1,18 +1,8 @@
-interface ContentProps {
-    parts: Part[];
-}
+import type {CoursePart} from './Course'
 
-interface Part {
-    name: string;
-    exercises:number;
-}
-
-const Total = (props:ContentProps) => {
-
-    const sum:number = props.parts.reduce((sm,part) => sm+part.exercises,0)
-
+const Total = ({parts}:{parts:CoursePart[]}) => {
     return (
-        <p>Total no. of exercises  -  {sum}</p>
+        <p><b>Total of {parts.reduce((s,part) => s+part.exercises,0)} exercises</b></p>
     )   
 }
 

@@ -1,11 +1,6 @@
-interface PartProps {
-    part: string
-    exercises: number
-}
-
-const Part = (props:PartProps) => {
+const Part = ({name,exercises}:{name:string, exercises:number}) => {
     return (
-        <p>{props.part}  -  {props.exercises}</p>
+        <p>{name} {exercises}</p>
     )
 }
 
