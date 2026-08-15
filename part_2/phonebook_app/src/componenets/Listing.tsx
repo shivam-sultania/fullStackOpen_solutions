@@ -1,13 +1,8 @@
 import Person from "./Person"
-
-export interface PersonProp {
-    name: string,
-    number: string,
-    id: number,
-}
+import type { PersonInterface } from "../interfaces"
 
 interface ListingProp {
-    persons: PersonProp[],
+    persons: PersonInterface[],
     filter: string,
 }
 

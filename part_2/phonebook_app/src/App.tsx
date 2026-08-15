@@ -1,19 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Filter from './componenets/Filter'
 import ContactForm from './componenets/ContactForm'
 import Listing from './componenets/Listing'
+import type { PersonInterface } from './interfaces'
+import axios from 'axios'
 
 const App = () => {
-   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ])
-  
+  const [persons, setPersons] = useState<PersonInterface[]>([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const[nameFilter, setNameFilter] = useState('')
+
+  useEffect(() => {
+    console.log("effect")
+    axios
+    .get('http://localhost:3001/persons')
+    .then(response => {
+      console.log("response fetched")
+      setPersons(response.data)
+    })
+    .catch(err => {
+      console.log('Fetch failed:', err)
+    })
+  },[])
 
   const handleSubmit = (event:React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -29,7 +38,20 @@ const App = () => {
       alert("You missed a field or two")
       return
     }
-    setPersons(persons.concat({ name: name, id:persons.length+1, number:newNumber}))
+    const updatedList = persons.concat({ name: name, id:persons.length+1, number:number})
+    console.log(updatedList)
+
+    setPersons(updatedList)
+
+    axios
+    .patch('http://localhost:3001/persons',updatedList)
+    .then(response => {
+      console.log('Person Added:', response)
+    })
+    .catch(error => {
+      console.log('Patch failed:', error)
+    })
+
     setNewName('')
     setNewNumber('')
   }

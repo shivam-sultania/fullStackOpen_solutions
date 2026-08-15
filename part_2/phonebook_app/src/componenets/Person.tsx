@@ -1,5 +1,5 @@
-import type {PersonProp} from './Listing'
+import type { PersonInterface } from "../interfaces"
 
-export default function Person({person}:{person:PersonProp}) {
-    return (<li>{person.name} {person.number}</li>)
+export default function Person({person}:{person:PersonInterface}) {
+    return (<li> {person.name} {person.number}</li>)
 }
